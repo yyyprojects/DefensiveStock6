@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Infographic: The Power of Defensive Stocks</title>
+    <!-- Chosen Palette: Energetic & Playful -->
+    <!-- Application Structure Plan: A single-page, top-to-bottom scrolling infographic telling a narrative story about defensive stocks. The structure is designed for linear consumption, starting with a bold hook ("What are they?"), moving through their core characteristics, comparing them to other stock types, showcasing key sectors with examples, and ending with a pros-and-cons summary. This narrative flow is ideal for an infographic format, guiding the user through a learning journey from basic concepts to strategic implications, making complex financial information easy to digest. -->
+    <!-- Visualization & Content Choices: 
+        - Report Info: Core Definition -> Goal: Inform -> Viz/Method: Large typography with Unicode icons (🛡️) to create a strong visual hook. -> Justification: Immediately grabs attention and establishes the theme. -> Library/Method: HTML/Tailwind.
+        - Report Info: Key Attributes (Inelastic Demand, Stable Earnings) -> Goal: Inform -> Viz/Method: A series of styled cards with large icons and concise text. -> Justification: Breaks down complex attributes into scannable, visually distinct points. -> Library/Method: HTML/Tailwind.
+        - Report Info: Defensive vs. Cyclical vs. Growth -> Goal: Compare -> Viz/Method: A multi-axis Radar Chart. -> Interaction: None, static comparison for clarity. -> Justification: Provides an instant visual "fingerprint" for each stock type, making multi-variable comparison intuitive. -> Library/Method: Chart.js.
+        - Report Info: Key Sectors & Examples -> Goal: Organize/Compare -> Viz/Method: A horizontal Bar Chart showing prominent examples ranked by a notional stability score. -> Justification: Bar charts are excellent for comparing and ranking distinct items. -> Library/Method: Chart.js.
+        - Report Info: Performance in Cycles -> Goal: Change/Compare -> Viz/Method: A simplified dual Line Chart within a single container. -> Justification: Clearly illustrates the core concept of outperformance in downturns and underperformance in booms. -> Library/Method: Chart.js.
+    -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0D1B2A; 
+        }
+        .gradient-text {
+            background: linear-gradient(90deg, #FF6B6B, #FFD166);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .card-icon {
+            font-size: 3rem;
+            line-height: 1;
+        }
+        .chart-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            height: 350px;
+            max-height: 50vh;
+        }
+        @media (min-width: 768px) {
+            .chart-container {
+                height: 450px;
+            }
+        }
+    </style>
+</head>
+<body class="text-white">
+
+    <div class="container mx-auto px-4 sm:px-6 lg:px-8 py-12 md:py-20">
+
+        <header class="text-center mb-16 md:mb-24">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-4">The Investor's <span class="gradient-text">Shield</span></h1>
+            <p class="text-xl md:text-2xl text-slate-300 max-w-3xl mx-auto">An Infographic Guide to <span class="font-bold text-cyan-400">Defensive Stocks</span> in the USA</p>
+        </header>
+
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">What Are They, <span class="gradient-text">Really?</span></h2>
+            <div class="max-w-4xl mx-auto bg-slate-800/50 p-8 rounded-2xl shadow-2xl text-center">
+                <p class="text-lg md:text-xl text-slate-200">
+                    Defensive stocks are shares in companies that provide <span class="font-bold text-yellow-300">essential goods and services</span> people need no matter what. Think electricity, food, and medicine. This constant demand makes them a stabilizing force, or a <span class="font-bold text-cyan-400">"protective shield,"</span> for your investments during a turbulent market.
+                </p>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">The <span class="gradient-text">Core Traits</span></h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+                <div class="bg-slate-800 p-6 rounded-xl shadow-lg text-center border-t-4 border-cyan-400">
+                    <div class="card-icon mb-4">🛒</div>
+                    <h3 class="text-xl font-bold mb-2">Inelastic Demand</h3>
+                    <p class="text-slate-400">People always need their products. Economic boom or bust, the demand stays consistent.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl shadow-lg text-center border-t-4 border-yellow-300">
+                    <div class="card-icon mb-4">💰</div>
+                    <h3 class="text-xl font-bold mb-2">Stable Earnings</h3>
+                    <p class="text-slate-400">Consistent demand leads to predictable revenue and strong, reliable cash flow.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl shadow-lg text-center border-t-4 border-pink-400">
+                    <div class="card-icon mb-4">🎁</div>
+                    <h3 class="text-xl font-bold mb-2">Consistent Dividends</h3>
+                    <p class="text-slate-400">Many are famous for paying regular income to investors, like clockwork.</p>
+                </div>
+                <div class="bg-slate-800 p-6 rounded-xl shadow-lg text-center border-t-4 border-green-400">
+                    <div class="card-icon mb-4">📉</div>
+                    <h3 class="text-xl font-bold mb-2">Low Volatility</h3>
+                    <p class="text-slate-400">Their prices tend to swing less wildly than the overall market (Beta &lt; 1.0).</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Stock Universe: <span class="gradient-text">A Comparison</span></h2>
+            <p class="text-center text-slate-300 max-w-2xl mx-auto mb-12">Not all stocks are created equal. See how Defensive stocks stack up against their Cyclical and Growth counterparts across key attributes.</p>
+            <div class="bg-slate-800/50 p-4 sm:p-8 rounded-2xl shadow-2xl">
+                <div class="chart-container">
+                    <canvas id="comparisonRadarChart"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Performance in <span class="gradient-text">Different Climates</span></h2>
+            <p class="text-center text-slate-300 max-w-2xl mx-auto mb-12">Defensive stocks shine in downturns but may lag in bull markets. This chart shows their typical behavior versus the broader market.</p>
+            <div class="grid md:grid-cols-2 gap-8">
+                <div class="bg-red-900/20 border border-red-500 p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold text-red-400 mb-4 text-center">During a Recession 📉</h3>
+                    <p class="text-slate-300 text-center mb-6">Defensive stocks tend to fall less, preserving capital.</p>
+                    <div class="h-48 relative">
+                        <canvas id="recessionChart"></canvas>
+                    </div>
+                </div>
+                <div class="bg-green-900/20 border border-green-500 p-6 rounded-xl">
+                    <h3 class="text-2xl font-bold text-green-400 mb-4 text-center">During an Expansion 📈</h3>
+                    <p class="text-slate-300 text-center mb-6">They grow steadily, but often slower than the market.</p>
+                    <div class="h-48 relative">
+                        <canvas id="expansionChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="mb-16 md:mb-24">
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Where to Find Them: <span class="gradient-text">Key Sectors</span></h2>
+            <p class="text-center text-slate-300 max-w-2xl mx-auto mb-12">These stocks cluster in industries providing life's necessities. Here are some of the most prominent examples in the USA.</p>
+            <div class="bg-slate-800/50 p-4 sm:p-8 rounded-2xl shadow-2xl">
+                <div class="chart-container h-96 md:h-[500px]">
+                    <canvas id="sectorsBarChart"></canvas>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="text-3xl md:text-4xl font-bold text-center mb-12">The <span class="gradient-text">Trade-Offs</span></h2>
+            <div class="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
+                <div class="bg-green-900/30 p-6 rounded-xl border border-green-500">
+                    <h3 class="text-2xl font-bold text-green-400 mb-4">PROS 👍</h3>
+                    <ul class="space-y-2 text-slate-200 list-disc list-inside">
+                        <li>Excellent downside protection</li>
+                        <li>Consistent income from dividends</li>
+                        <li>Lower overall portfolio risk</li>
+                        <li>Peace of mind in volatile times</li>
+                    </ul>
+                </div>
+                <div class="bg-red-900/30 p-6 rounded-xl border border-red-500">
+                    <h3 class="text-2xl font-bold text-red-400 mb-4">CONS 👎</h3>
+                    <ul class="space-y-2 text-slate-200 list-disc list-inside">
+                        <li>Limited growth during bull markets</li>
+                        <li>Can become overvalued in recessions</li>
+                        <li>Risk of selling too early in a boom</li>
+                        <li>Dividends are reliable, but not guaranteed</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+        
+    </div>
+
+    <footer class="text-center py-8 border-t border-slate-700">
+        <p class="text-slate-400">Infographic for educational purposes only. Not financial advice.</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            const chartDefaultOptions = {
+                responsive: true,
+                maintainAspectRatio: false,
+                plugins: {
+                    legend: {
+                        labels: {
+                            color: '#cbd5e1',
+                            font: {
+                                family: "'Poppins', sans-serif",
+                                size: 12,
+                            }
+                        }
+                    },
+                    tooltip: {
+                        bodyFont: { family: "'Poppins', sans-serif" },
+                        titleFont: { family: "'Poppins', sans-serif" },
+                        callbacks: {
+                            title: function(tooltipItems) {
+                                const item = tooltipItems[0];
+                                let label = item.chart.data.labels[item.dataIndex];
+                                if (Array.isArray(label)) {
+                                  return label.join(' ');
+                                } else {
+                                  return label;
+                                }
+                            }
+                        }
+                    }
+                },
+            };
+
+            const wrapLabel = (label) => {
+                if (label.length > 16) {
+                    const words = label.split(' ');
+                    let currentLine = '';
+                    const lines = [];
+                    words.forEach(word => {
+                        if ((currentLine + word).length > 16) {
+                            lines.push(currentLine.trim());
+                            currentLine = '';
+                        }
+                        currentLine += word + ' ';
+                    });
+                    lines.push(currentLine.trim());
+                    return lines;
+                }
+                return label;
+            };
+            
+            new Chart(document.getElementById('comparisonRadarChart'), {
+                type: 'radar',
+                data: {
+                    labels: ['Stability', 'Growth Potential', 'Dividend Yield', 'Recession Resilience', 'Volatility'],
+                    datasets: [
+                        {
+                            label: 'Defensive',
+                            data: [9, 3, 8, 9, 2],
+                            backgroundColor: 'rgba(34, 211, 238, 0.2)',
+                            borderColor: 'rgba(34, 211, 238, 1)',
+                            pointBackgroundColor: 'rgba(34, 211, 238, 1)',
+                            borderWidth: 2,
+                        },
+                        {
+                            label: 'Cyclical',
+                            data: [3, 8, 4, 2, 9],
+                            backgroundColor: 'rgba(255, 107, 107, 0.2)',
+                            borderColor: 'rgba(255, 107, 107, 1)',
+                            pointBackgroundColor: 'rgba(255, 107, 107, 1)',
+                            borderWidth: 2,
+                        },
+                        {
+                            label: 'Growth',
+                            data: [4, 10, 1, 3, 8],
+                            backgroundColor: 'rgba(255, 209, 102, 0.2)',
+                            borderColor: 'rgba(255, 209, 102, 1)',
+                            pointBackgroundColor: 'rgba(255, 209, 102, 1)',
+                            borderWidth: 2,
+                        }
+                    ]
+                },
+                options: {
+                    ...chartDefaultOptions,
+                    scales: {
+                        r: {
+                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
+                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
+                            pointLabels: { 
+                                color: '#e2e8f0',
+                                font: { family: "'Poppins', sans-serif", size: 12 } 
+                            },
+                            ticks: {
+                                color: '#1e293b',
+                                backdropColor: 'rgba(255, 255, 255, 0.8)',
+                                backdropPadding: 4,
+                                borderRadius: 4,
+                                font: { family: "'Poppins', sans-serif" }
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10,
+                        }
+                    }
+                }
+            });
+
+            new Chart(document.getElementById('recessionChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Mid', 'End'],
+                    datasets: [
+                        { label: 'Market', data: [100, 80, 75], borderColor: '#f87171', tension: 0.2, borderWidth: 2 },
+                        { label: 'Defensive', data: [100, 95, 92], borderColor: '#67e8f9', tension: 0.2, borderWidth: 4 }
+                    ]
+                },
+                options: {
+                    ...chartDefaultOptions,
+                    scales: {
+                        y: { display: false },
+                        x: { display: false }
+                    },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            new Chart(document.getElementById('expansionChart'), {
+                type: 'line',
+                data: {
+                    labels: ['Start', 'Mid', 'End'],
+                    datasets: [
+                        { label: 'Market', data: [100, 120, 140], borderColor: '#4ade80', tension: 0.2, borderWidth: 4 },
+                        { label: 'Defensive', data: [100, 105, 110], borderColor: '#67e8f9', tension: 0.2, borderWidth: 2 }
+                    ]
+                },
+                options: {
+                    ...chartDefaultOptions,
+                    scales: {
+                        y: { display: false },
+                        x: { display: false }
+                    },
+                    plugins: { legend: { position: 'bottom' } }
+                }
+            });
+
+            const sectorData = {
+                labels: ['Procter & Gamble', 'Johnson & Johnson', 'Coca-Cola', 'Walmart', 'NextEra Energy', 'Pfizer', 'Duke Energy'].map(wrapLabel),
+                datasets: [{
+                    label: 'Sector Examples by Stability',
+                    data: [9.5, 9.2, 9.0, 8.8, 8.5, 8.2, 8.0],
+                    backgroundColor: [
+                        '#FF6B6B', '#FFD166', '#06D6A0', '#118AB2', '#073B4C', '#EE6055', '#60D394'
+                    ],
+                    borderColor: '#0D1B2A',
+                    borderWidth: 2
+                }]
+            };
+
+            new Chart(document.getElementById('sectorsBarChart'), {
+                type: 'bar',
+                data: sectorData,
+                options: {
+                    ...chartDefaultOptions,
+                    indexAxis: 'y',
+                    scales: {
+                        y: {
+                            ticks: { color: '#cbd5e1', font: { family: "'Poppins', sans-serif" } },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#cbd5e1', font: { family: "'Poppins', sans-serif" } },
+                            grid: { color: 'rgba(255, 255, 255, 0.1)' }
+                        }
+                    },
+                    plugins: {
+                        ...chartDefaultOptions.plugins,
+                        legend: { display: false }
+                    }
+                }
+            });
+        });
+    </script>
+</body>
+</html>
